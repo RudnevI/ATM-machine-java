@@ -26,4 +26,13 @@ public class CityBankAccount extends BankAccount {
         this.name = name;
         this.surname = surname;
     }
+
+    @Override
+    public String toString() {
+        return "CityBankAccount{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", " + super.toString() + ", " +
+                '}';
+    }
 }

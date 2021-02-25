@@ -17,4 +17,11 @@ public class NationalBankAccount extends BankAccount {
         this.fullname = fullname;
     }
 
+    @Override
+    public String toString() {
+        return "NationalBankAccount{" +
+                "fullname='" + fullname + '\'' +
+                ", " + super.toString() + ", " +
+                '}';
+    }
 }

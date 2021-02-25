@@ -12,4 +12,5 @@ public interface BankService {
     void withdrawal(BankAccount client, Integer money);
     void replenishment(BankAccount client, Integer money);
     String accountData(BankAccount client);
+
 }
