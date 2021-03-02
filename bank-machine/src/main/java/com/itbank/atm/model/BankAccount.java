@@ -7,6 +7,10 @@ public abstract class BankAccount {
     private String accountNumber;
     private String pinCode;
 
+    public BankAccount() {
+
+    }
+
     public Integer getBalance() {
         return balance;
     }

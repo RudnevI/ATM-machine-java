@@ -3,6 +3,9 @@ package com.itbank.atm.model;
 public class NationalBankAccount extends BankAccount {
     private String fullname;
 
+    public NationalBankAccount() {
+
+    }
 
 
     public String getFullname() {
@@ -12,7 +15,7 @@ public class NationalBankAccount extends BankAccount {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    public NationalBankAccount(String fullnam, Integer balance, String accountNumber, String pinCode) {
+    public NationalBankAccount(String fullname, Integer balance, String accountNumber, String pinCode) {
         super(balance, accountNumber, pinCode);
         this.fullname = fullname;
     }

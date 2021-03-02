@@ -1,20 +1,19 @@
 package com.itbank.atm.service;
 
 import com.itbank.atm.dao.Database;
-import com.itbank.atm.dao.Database;
 import com.itbank.atm.model.BankAccount;
-
-import javax.xml.crypto.Data;
-import java.util.Optional;
 
 public class BankServiceImpl implements BankService {
     @Override
     public BankAccount getClient(String accountNumber, String pincode) {
-        return Database.getBankAccountList()
-                .stream()
-                .filter(account -> account.getAccountNumber().equals(accountNumber) && account.getPinCode().equals(pincode))
-                .findAny()
-                .orElse(null);
+        for (BankAccount account :
+                Database.getBankAccountList()) {
+            if (account.getAccountNumber().equals(accountNumber) &&
+            account.getPinCode().equals(pincode)) {
+               return account;
+            }
+        }
+        return null;
 
     }
 
@@ -23,7 +22,7 @@ public class BankServiceImpl implements BankService {
         String accountNumber = null;
         for (BankAccount listAccount :
                 Database.getBankAccountList()) {
-            if (listAccount.equals(client)) accountNumber = new String(listAccount.getAccountNumber());
+            if (listAccount.equals(client)) accountNumber = listAccount.getAccountNumber();
         }
         return accountNumber;
 
@@ -34,7 +33,7 @@ public class BankServiceImpl implements BankService {
         String pincode = null;
         for (BankAccount listAccount :
                 Database.getBankAccountList()) {
-            if (listAccount.equals(client)) pincode = new String(listAccount.getPinCode());
+            if (listAccount.equals(client)) pincode = listAccount.getPinCode();
         }
         return pincode;
     }
@@ -64,6 +63,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void withdrawal(BankAccount client, Integer money) {
+        money = validateTransaction(money);
         for (BankAccount account :
                 Database.getBankAccountList()) {
             if (client.equals(account)) {
@@ -74,6 +74,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void replenishment(BankAccount client, Integer money) {
+        money = validateTransaction(money);
         for (BankAccount account :
                 Database.getBankAccountList()) {
             if (client.equals(account)) {
@@ -84,6 +85,16 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public String accountData(BankAccount client) {
+        for (BankAccount account :
+                Database.getBankAccountList()) {
+            if (client.equals(account)) {
+                return account.toString();
+            }
+        }
         return null;
+    }
+    private Integer validateTransaction(Integer money) {
+        if(money < 0)  money=Math.abs(money);
+        return money;
     }
 }

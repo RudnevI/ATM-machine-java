@@ -4,6 +4,10 @@ public class CityBankAccount extends BankAccount {
     private String name;
     private String surname;
 
+    public CityBankAccount() {
+        super();
+    }
+
 
     public String getName() {
         return name;
